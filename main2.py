@@ -13,7 +13,7 @@ from pyrogram.types import Message
 from pyrogram import Client, filters
 import tgcrypto
 from p_bar import progress_bar
-from details import api_id, api_hash, bot_token, Sudo_groups
+# from details import api_id, api_hash, bot_token, Sudo_groups
 from subprocess import getstatusoutput
 import helper
 import logging
@@ -30,21 +30,21 @@ import os
 # import pycurl
 
 
-bot = Client(
-    
-    "bot",
-    api_id=api_id,
-    api_hash=api_hash,
-    bot_token=bot_token)
-
-#bot = Client(
+# bot = Client(
+#    
 #    "bot",
-#    bot_token=os.environ.get("BOT_TOKEN"),
-#    api_id=int(os.environ.get("API_ID")),
-#    api_hash=os.environ.get("API_HASH")
-#)
-#auth_users = [ int(chat) for chat in os.environ.get("AUTH_USERS").split(",") if chat != '']
-#sudo_users = auth_users
+#    api_id=api_id,
+#    api_hash=api_hash,
+#    bot_token=bot_token)
+
+bot = Client(
+    "bot",
+    bot_token=os.environ.get("BOT_TOKEN"),
+    api_id=int(os.environ.get("API_ID")),
+    api_hash=os.environ.get("API_HASH")
+)
+auth_users = [ int(chat) for chat in os.environ.get("AUTH_USERS").split(",") if chat != '']
+sudo_users = auth_users
 sudo_groups = [ int(chat) for chat in Sudo_groups.split(",")  if chat != '']
 
 @bot.on_message(filters.command(["start"])&  (filters.chat(sudo_groups)))
